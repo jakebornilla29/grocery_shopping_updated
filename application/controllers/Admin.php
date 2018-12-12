@@ -143,4 +143,38 @@ class Admin extends CI_Controller
             $this->load->view('index.html');
         }
     }
+
+     function order()
+    {
+        if (isset($_SESSION['email'])) {
+            if ($_SESSION['status'] == 'admin') {
+                $query = $this->Admin_model->getOrders();
+
+                $data['order1'] = $query->result();
+
+                $this->load->view('orders', $data);
+            }
+        }
+        else {
+            $this->load->view('index.html');
+        }
+
+    }
+
+    function changeStatus()
+    {
+        if (isset($_SESSION['email'])) {
+            if ($_SESSION['status'] == 'admin') {
+                $po_id = $_GET['po_id'];
+
+                $this->Admin_model->updStatus($po_id, 'delivered');
+
+                redirect('Admin/order');
+            }
+        }
+        else {
+            $this->load->view('index.html');
+        }
+    }
+    
 }

@@ -30,4 +30,15 @@ class Admin_model extends CI_Model
         $this->db->where('p_id', $id);
         $this->db->delete('products');
     }
+
+    function getOrders(){
+        $query = $this->db->get('pending_orders');
+        return $query;
+    }
+
+    function updStatus($po_id,$value){
+        $this->db->set('status', $value);
+        $this->db->where('po_id', $po_id);
+        $this->db->update('pending_orders');
+    }
 }
