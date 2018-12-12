@@ -6,7 +6,8 @@ class Welcome extends CI_Controller {
 	
 	public function index()
 	{
-		$this->load->view('index');
+		$data['prod'] = $this->Admin_model->getProd();
+		$this->load->view('index',$data);
 	}
 
 	public function login()
@@ -17,5 +18,22 @@ class Welcome extends CI_Controller {
      public function register()
     {
         $this->load->view('register');
+    }
+
+    public function add_pro()
+    {
+        if(isset($_SESSION['status'])){
+            if($_SESSION['status'] == 'admin'){
+                $this->load->view('add_pro');
+            }
+        }
+        else{
+            ?>
+            <script>
+                alert('Access Denied');
+                window.location = "<?php echo base_url() ?>";
+            </script>
+            <?php
+        }
     }
 }

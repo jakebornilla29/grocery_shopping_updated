@@ -125,7 +125,30 @@
                 <div class="latest-product">
                     <h2 class="section-title">Latest Products</h2>
                     <div class="product-carousel">
+                        
+                        <?php
+                        if(isset($prod)){
+                            foreach ($prod as $row){
+                                ?>
+                                <div class="single-product">
+                                    <div class="product-f-image">
+                                        <img style='height:250px; width:300px' src="<?php echo base_url('uploads/'.$row->file_name)?>" alt="">
+                                        <div class="product-hover">
+                                            <a href="<?php echo base_url('Cart?id='.$row->p_id)?>" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                            <a href="<?php echo base_url('Welcome/single?id='.$row->p_id) ?>" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                        </div>
+                                    </div>
 
+                                    <h2><a href="single-product.php"><?php echo $row->product_name ?></a></h2>
+
+                                    <div class="product-carousel-price">
+                                        <ins>PHP <?php echo $row->product_price ?></ins>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        }
+                        ?>
     
                     </div>
                 </div>

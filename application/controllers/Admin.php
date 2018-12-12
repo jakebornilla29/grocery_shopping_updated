@@ -5,12 +5,69 @@ class Admin extends CI_Controller
     {
         if (isset($_SESSION['email'])) {
             if ($_SESSION['status'] == 'admin') {
-    
+                $query = $this->Admin_model->getProd();
+                $data['prods'] = $query;
 
-                $this->load->view('admin');
+                $this->load->view('admin',$data);
             }
         }
         else {
+            $this->load->view('index.html');
+        }
+    }
+
+    public function do_upload()
+    {
+        if (isset($_SESSION['email'])) {
+            if ($_SESSION['status'] == 'admin') {
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'jpg|png';
+
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('userfile')) {
+                    $error = array('error' => $this->upload->display_errors());
+
+                    $this->load->view('add_pro', $error);
+                } else {
+                    $pro_name = $_POST['pro_name'];
+                    $pro_cat = $_POST['pro_cat'];
+                    $pro_price = $_POST['pro_price'];
+                    $product_des = $_POST['product_des'];
+                    $file_name = $this->upload->data('file_name');
+                    $file_path = $this->upload->data('file_path');
+                    $file_ext = $this->upload->data('file_ext');
+                    $p_id = '';
+
+                    $query = $this->Admin_model->pID();
+
+                    foreach ($query->result() as $row) {
+                        $p_id = $row->p_id;
+                    }
+
+                    $p_id++;
+
+
+                    $data = array(
+                        'p_id' => $p_id,
+                        'product_name' => $pro_name,
+                        'product_category' => $pro_cat,
+                        'product_price' => $pro_price,
+                        'product_des' => $product_des,
+                        'file_name' => $file_name,
+                        'file_path' => $file_path,
+                        'file_ext' => $file_ext,
+                    );
+
+                    $this->Admin_model->addProd($data);
+
+                    $data['suc_mess'] = 'Product Sucessfully Added';
+
+                    $this->load->view('add_pro', $data);
+                }
+            }
+        }
+        else{
             $this->load->view('index.html');
         }
     }
