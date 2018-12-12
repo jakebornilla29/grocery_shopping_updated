@@ -69,6 +69,39 @@ class Welcome extends CI_Controller {
     {
         redirect('Checkout');
     }
+
+    public function forgot_password()
+    {
+        $this->form_validation->set_rules('email','Email','required|valid_email');
+        if ($this->form_validation->run() == FALSE) 
+        {
+            $this->load->view('forgot_password');
+        }
+        else
+        {
+            $email = $this->input->post('email');
+            $result = $this->Login_model->checkEmail($email);
+
+            if (!$result) {
+                $data['forgot_error'] = 'We cant find your email address.';
+                $this->load->view('forgot_password',$data);
+            }
+            else{
+            //token
+            $token = $this->Login_model->insertToken($result->u_id);
+            $tokenn = base64_encode($token);
+            $url = 'welcome/reset_password/token/' . $tokenn;
+            $link = '<a href="' . $url . '">' . $url . '</a>';
+
+            $message = '';
+            $message .= '<strong>A password reset has been requested for this email account.</strong><br>';
+            $message .= '<strong>Please click:</strong>' . $link;
+            echo $message;
+            exit;}
+
+        }
+        
+    }
 }
 
 
