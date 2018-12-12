@@ -47,4 +47,23 @@ class Welcome extends CI_Controller {
         $id = $_GET['id'];
         redirect('Single?id='.$id);
     }
+
+    public function cart()
+    {
+        if(isset($_SESSION['email'])){
+            if($_SESSION['email'] != ''){
+                $this->load->view('cart');
+            }
+        }
+        else{
+            ?>
+            <script>
+                alert('Access Denied');
+                window.location = "<?php echo base_url() ?>";
+            </script>
+            <?php
+        }
+    }
 }
+
+
