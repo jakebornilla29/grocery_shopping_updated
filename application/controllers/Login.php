@@ -44,6 +44,11 @@ class Login extends CI_Controller
         }
     }
 }
-
+    function logout(){
+        $array_items = array('username', 'email','u_id','dis_name');
+        $this->session->unset_userdata($array_items);
+        session_destroy();
+        redirect('Welcome');
+    }
     
 }
