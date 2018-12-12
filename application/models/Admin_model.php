@@ -25,4 +25,9 @@ class Admin_model extends CI_Model
         $this->db->where('p_id', $id);
         $this->db->update('products', $data);
     }
+
+    function del_pro($id){
+        $this->db->where('p_id', $id);
+        $this->db->delete('products');
+    }
 }

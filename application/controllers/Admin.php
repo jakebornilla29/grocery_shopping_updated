@@ -127,4 +127,20 @@ class Admin extends CI_Controller
             $this->load->view('index.html');
         }
     }
+
+    function delPro()
+    {
+        if (isset($_SESSION['email'])) {
+            if ($_SESSION['status'] == 'admin') {
+                $id = $_GET['id'];
+
+                $this->Admin_model->del_pro($id);
+
+                redirect('Admin');
+            }
+        }
+        else{
+            $this->load->view('index.html');
+        }
+    }
 }
