@@ -70,6 +70,17 @@ class Welcome extends CI_Controller {
         redirect('Checkout');
     }
 
+     public function reciept()
+    {
+        $oh = $_GET['oh'];
+
+        $query = $this->Checkout_model->getOrder($oh);
+
+        $data['order'] = $query->result();
+
+        $this->load->view('reciept',$data);
+    }
+
     public function forgot_password()
     {
         $this->form_validation->set_rules('email','Email','required|valid_email');

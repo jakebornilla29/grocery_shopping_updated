@@ -26,4 +26,5 @@ class Login_model extends CI_Model
    					//->\query($query);
    					return $token . $user;
    
-}
+	}
+}	
