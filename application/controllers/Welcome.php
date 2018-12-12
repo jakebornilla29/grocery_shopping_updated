@@ -64,6 +64,11 @@ class Welcome extends CI_Controller {
             <?php
         }
     }
+
+     public function checkout()
+    {
+        redirect('Checkout');
+    }
 }
 
 
