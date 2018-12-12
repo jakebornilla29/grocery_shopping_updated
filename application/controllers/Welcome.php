@@ -36,4 +36,15 @@ class Welcome extends CI_Controller {
             <?php
         }
     }
+
+    public function shop()
+    {
+        redirect('Shop');
+    }
+
+    public function single()
+    {
+        $id = $_GET['id'];
+        redirect('Single?id='.$id);
+    }
 }
