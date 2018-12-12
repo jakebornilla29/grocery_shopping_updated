@@ -71,6 +71,60 @@ class Admin extends CI_Controller
             $this->load->view('index.html');
         }
     }
-
     
+    function editPro()
+    {
+        if (isset($_SESSION['email'])) {
+            if ($_SESSION['status'] == 'admin') {
+                $id = $_GET['id'];
+
+                $query = $this->Admin_model->edit_pro($id);
+
+                $data['edPro'] = $query->result();
+
+                $this->load->view('edit_pro', $data);
+            }
+        }
+        else{
+            $this->load->view('index.html');
+        }
+    }
+    
+    function updatePro()
+    {
+        if (isset($_SESSION['email'])) {
+            if ($_SESSION['status'] == 'admin') {
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'gif|jpg|png';
+
+                $this->load->library('upload', $config);
+
+                $pro_name = $_POST['pro_name'];
+                $pro_cat = $_POST['pro_cat'];
+                $pro_price = $_POST['pro_price'];
+                $product_des = $_POST['product_des'];
+                $file_name = $this->upload->data('file_name');
+                $file_path = $this->upload->data('file_path');
+                $file_ext = $this->upload->data('file_ext');
+                $id = $_POST['id'];
+
+                $data = array(
+                    'product_name' => $pro_name,
+                    'product_category' => $pro_cat,
+                    'product_price' => $pro_price,
+                    'product_des' => $product_des
+                    
+                );
+
+                $this->Admin_model->upd_pro($id, $data);
+
+                $data['suc_mess'] = 'Product Sucessfully Updated';
+
+                $this->load->view('edit_pro', $data);
+            }
+        }
+        else{
+            $this->load->view('index.html');
+        }
+    }
 }

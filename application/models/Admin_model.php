@@ -16,4 +16,13 @@ class Admin_model extends CI_Model
         return $query->result();
     }
 
+    function edit_pro($id){
+        $query = $this->db->get_where('products',array('p_id' => $id));
+        return $query;
+    }
+
+    function upd_pro($id,$data){
+        $this->db->where('p_id', $id);
+        $this->db->update('products', $data);
+    }
 }
