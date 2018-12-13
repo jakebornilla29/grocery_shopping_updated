@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2018 at 05:52 AM
+-- Generation Time: Dec 13, 2018 at 06:47 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -89,8 +89,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`p_id`, `product_name`, `product_category`, `product_price`, `product_des`, `file_name`, `file_path`, `file_ext`) VALUES
-(2, 'Apple', 'Fruits ', '20', 'This is a fresh fruit from province.', 'apple.jpg', 'C:/xampp/htdocs/grocery_shopping/uploads/', '.jpg'),
-(3, 'Pumpkin', 'Vegetables', '20', 'This is a fresh pumpkin', '0972-squash-cornfield-pumpkin1.jpg', 'C:/xampp/htdocs/grocerie/uploads/', '.jpg');
+(3, 'Pumpkin', 'Vegetables', '20', 'This is a fresh pumpkin', '0972-squash-cornfield-pumpkin1.jpg', 'C:/xampp/htdocs/grocerie/uploads/', '.jpg'),
+(4, 'Apple ', 'Fruits ', '10', 'This is a fresh apple.', 'apple.jpg', 'C:/xampp/htdocs/grocerie/uploads/', '.jpg'),
+(5, 'Mango', 'Fruits ', '12', 'This is a fresh mango', 'mango.png', 'C:/xampp/htdocs/grocerie/uploads/', '.png'),
+(6, 'Strawberry', 'Fruits ', '13', 'This is a fresh strawberry', 'strawberry.jpg', 'C:/xampp/htdocs/grocerie/uploads/', '.jpg'),
+(7, 'Lettuce', 'Vegetables', '17', 'This is a fresh lettuce', 'lettuce.jpg', 'C:/xampp/htdocs/grocerie/uploads/', '.jpg'),
+(8, 'Broccoli', 'Vegetables', '21', 'This is a fresh broccoli', 'broccoli.jpg', 'C:/xampp/htdocs/grocerie/uploads/', '.jpg');
 
 -- --------------------------------------------------------
 
